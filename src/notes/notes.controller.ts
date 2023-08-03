@@ -1,10 +1,31 @@
-import { Controller, Get, Param, Patch, Body, Delete } from "@nestjs/common";
+import {
+    Controller,
+    Get,
+    Param,
+    Patch,
+    Body,
+    Delete,
+    Post,
+    PipeTransform,
+    ArgumentMetadata,
+    BadRequestException,
+    UsePipes,
+} from "@nestjs/common";
 import { Note, Stats } from "./types/types";
 import { NotesService } from "./notes.service";
 import { EditNoteDto } from "./dto/edit-note.dto";
 import { PositiveIntPipe } from "src/pipes/PositiveIntPipe";
+import { CreateNoteDto } from "./dto/create-note.dto";
 
-@Controller("notes")
+export class EmptyBodyPipe implements PipeTransform {
+    transform(value: any, metadata: ArgumentMetadata) {
+        if (value === undefined || Object.keys(value).length === 0) {
+            throw new BadRequestException("Request body cannot be empty");
+        }
+        return value;
+    }
+}
+@Controller("/notes")
 export class NotesController {
     constructor(private readonly notesService: NotesService) {}
     @Get()
@@ -30,5 +51,12 @@ export class NotesController {
     @Delete(":id")
     deleteNote(@Param("id", PositiveIntPipe) id: string): Note {
         return this.notesService.deleteNote(Number(id));
+    }
+
+    @Post()
+    @UsePipes(new EmptyBodyPipe())
+    addNote(@Body(new EmptyBodyPipe()) editNoteDto: CreateNoteDto): Note {
+        console.log(editNoteDto);
+        return this.notesService.addNote(editNoteDto);
     }
 }

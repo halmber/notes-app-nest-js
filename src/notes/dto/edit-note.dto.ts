@@ -15,7 +15,6 @@ export class EditNoteDto {
 
     @IsOptional()
     @IsString()
-    @MinLength(4)
     @IsIn(NOTES_CATEGORIES)
     readonly category?: CategoryType;
 

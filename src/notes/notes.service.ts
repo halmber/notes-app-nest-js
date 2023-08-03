@@ -5,6 +5,7 @@ import { NOTES_CATEGORIES, Status } from "./constants/constants";
 import { getCountOfCategory } from "src/utils/getCountOfCategory ";
 import { EditNoteDto } from "./dto/edit-note.dto";
 import { getDatesFromContent } from "src/utils/getDatesFromContent";
+import { CreateNoteDto } from "./dto/create-note.dto";
 
 @Injectable()
 export class NotesService {
@@ -49,8 +50,23 @@ export class NotesService {
         }
     }
 
-    deleteNote(id: number):Note {
+    deleteNote(id: number): Note {
         const noteIndex = notes.findIndex((note) => note.id === id);
         return notes.splice(noteIndex, 1)[0];
+    }
+
+    addNote(payload: CreateNoteDto): Note {
+        if (Object.keys(payload).length === 0) {
+            throw new HttpException("Empty request body", HttpStatus.BAD_REQUEST);
+        }
+        const newNote = {
+            ...payload,
+            id: notes.at(-1).id + 1,
+            created: new Date().getTime(),
+            dates: getDatesFromContent(payload.content),
+            status: Status.ACTIVE,
+        };
+        notes.push(newNote);
+        return newNote;
     }
 }

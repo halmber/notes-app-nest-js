@@ -1,5 +1,6 @@
-import { PipeTransform, BadRequestException } from "@nestjs/common";
+import { PipeTransform, BadRequestException, Injectable } from "@nestjs/common";
 
+@Injectable()
 export class PositiveIntPipe implements PipeTransform {
     transform(value: any) {
         const intValue = parseInt(value, 10);
