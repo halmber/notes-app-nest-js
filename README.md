@@ -24,7 +24,24 @@
 
 ## Description
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+### About the task:
+
+1. Task is to create a NodeJS application with TypeScript that will have few REST endpoints.
+
+2. Users can add, edit and remove notes, archive and unarchive them.
+
+3. Store data in memory as a mocked object. Prepopulate it with 7 notes and use it by default as an initial state so that they are returned when you call an endpoint. You can use the same object structure as in the frontend using following columns: [“Name”, “Date”, “Category”, “Content”] and also additional columns if needed.
+
+### List of endpoints should look like this:
+
+| Query type | Endpoint     | Action                                                                                                                      |
+| :--------- | :----------- | :-------------------------------------------------------------------------------------------------------------------------- |
+| POST       | /notes       | Create a note object.                                                                                                       |
+| DELETE     | /notes/:id   | Remove item.                                                                                                                |
+| PATCH      | /notes/:id   | Edit item.                                                                                                                  |
+| GET        | /notes/:id   | Retrieve item.                                                                                                              |
+| GET        | /notes       | Get all notes.                                                                                                              |
+| GET        | /notes/stats | Get aggregated data statistics. You don’t have to mock this data. You need to calculate it based on notes objects you have. |
 
 ## Installation
 
@@ -64,9 +81,9 @@ Nest is an MIT-licensed open source project. It can grow thanks to the sponsors 
 
 ## Stay in touch
 
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+-   Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
+-   Website - [https://nestjs.com](https://nestjs.com/)
+-   Twitter - [@nestframework](https://twitter.com/nestframework)
 
 ## License
 
