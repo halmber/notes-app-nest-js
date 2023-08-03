@@ -31,7 +31,7 @@ export class NotesService {
         return note;
     }
 
-    editNote(payload: EditNoteDto, id: number) {
+    editNote(payload: EditNoteDto, id: number): Note {
         if (Object.keys(payload).length === 0) {
             throw new HttpException("No content", HttpStatus.NO_CONTENT);
         }
@@ -47,5 +47,10 @@ export class NotesService {
         } else {
             throw new NotFoundException(`Note with id ${id} was not found.`);
         }
+    }
+
+    deleteNote(id: number):Note {
+        const noteIndex = notes.findIndex((note) => note.id === id);
+        return notes.splice(noteIndex, 1)[0];
     }
 }
