@@ -1,6 +1,6 @@
-import { Injectable, NotFoundException } from "@nestjs/common";
+import { Injectable, NotFoundException, HttpStatus, HttpException } from "@nestjs/common";
 import { notes } from "src/mocks/notes";
-import { Note, Stats, Stat } from "./types/types";
+import { Note, Stats } from "./types/types";
 import { NOTES_CATEGORIES, Status } from "./constants/constants";
 import { getCountOfCategory } from "src/utils/getCountOfCategory ";
 import { EditNoteDto } from "./dto/edit-note.dto";
@@ -32,6 +32,10 @@ export class NotesService {
     }
 
     editNote(payload: EditNoteDto, id: number) {
+        if (Object.keys(payload).length === 0) {
+            throw new HttpException("No content", HttpStatus.NO_CONTENT);
+        }
+
         const noteIndex = notes.findIndex((note) => note.id === id);
         if (noteIndex !== -1) {
             notes[noteIndex] = {

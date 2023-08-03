@@ -1,4 +1,4 @@
-import { Controller, Get, Param, Patch, Body } from "@nestjs/common";
+import { Controller, Get, Param, Patch, Body, ParseIntPipe } from "@nestjs/common";
 import { Note, Stats } from "./types/types";
 import { NotesService } from "./notes.service";
 import { EditNoteDto } from "./dto/edit-note.dto";
@@ -17,12 +17,12 @@ export class NotesController {
     }
 
     @Get(":id")
-    getNote(@Param("id") id: string): Note {
+    getNote(@Param("id", ParseIntPipe) id: string): Note {
         return this.notesService.getNote(Number(id));
     }
 
     @Patch(":id")
-    editNote(@Body() editNoteDto: EditNoteDto, @Param("id") id: string) {
+    editNote(@Body() editNoteDto: EditNoteDto, @Param("id", ParseIntPipe) id: string) {
         return this.notesService.editNote(editNoteDto, Number(id));
     }
 }
