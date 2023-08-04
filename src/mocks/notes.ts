@@ -3,6 +3,7 @@ import { Note } from "src/notes/types/types";
 
 export let notes: Note[] = [
     {
+        id: 0,
         name: "Shoping list",
         created: 1690797198699,
         category: "Task",
@@ -11,6 +12,7 @@ export let notes: Note[] = [
         status: Status.ARCHIVED,
     },
     {
+        id: 1,
         name: "Dentist",
         created: 1690795198699,
         category: "Idea",
@@ -20,6 +22,7 @@ export let notes: Note[] = [
         status: Status.ACTIVE,
     },
     {
+        id: 2,
         name: "Gym Workout",
         created: 1690785198699,
         category: "Random Thought",
@@ -28,6 +31,7 @@ export let notes: Note[] = [
         status: Status.ARCHIVED,
     },
     {
+        id: 3,
         name: "Travel Ideas",
         created: 1690685198699,
         category: "Idea",
@@ -36,6 +40,7 @@ export let notes: Note[] = [
         status: Status.ACTIVE,
     },
     {
+        id: 4,
         name: "Language Learning",
         created: 1690585198699,
         category: "Task",
@@ -44,6 +49,7 @@ export let notes: Note[] = [
         status: Status.ACTIVE,
     },
     {
+        id: 5,
         name: "Financial Planning",
         created: 1690485198699,
         category: "Plan",
@@ -52,6 +58,7 @@ export let notes: Note[] = [
         status: Status.ACTIVE,
     },
     {
+        id: 6,
         name: "Project Ideas",
         created: 1690385198699,
         category: "Task",
