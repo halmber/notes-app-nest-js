@@ -20,3 +20,13 @@ export type Stat = {
 export type Stats = {
     [key in CategoryType]: Stat;
 };
+
+export type StatsSchema = {
+    [key in CategoryType]: {
+        type: "object";
+        properties: {
+            countOfActive: { type: "number" };
+            countOfArchived: { type: "number" };
+        };
+    };
+};
