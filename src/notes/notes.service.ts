@@ -52,7 +52,11 @@ export class NotesService {
 
     deleteNote(id: number): Note {
         const noteIndex = notes.findIndex((note) => note.id === id);
-        return notes.splice(noteIndex, 1)[0];
+        if (noteIndex !== -1) {
+            return notes.splice(noteIndex, 1)[0];
+        } else {
+            throw new NotFoundException(`Note with id ${id} was not found.`);
+        }
     }
 
     addNote(payload: CreateNoteDto): Note {
