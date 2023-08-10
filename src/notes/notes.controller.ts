@@ -24,7 +24,7 @@ export class NotesController {
         content: STATS_SCHEMA_PROPERTIES,
     })
     @Get("/stats")
-    getDataStatistic(): Stats {
+    getDataStatistic(): Promise<Stats> {
         return this.notesService.getDataStatistic();
     }
 

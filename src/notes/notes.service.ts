@@ -25,14 +25,17 @@ export class NotesService {
         return await this.noteRepository.findAll();
     }
 
-    getDataStatistic(): Stats {
+    async getDataStatistic(): Promise<Stats> {
+        const notes = await this.noteRepository.findAll();
         const stats: Stats = {} as Stats;
+
         NOTES_CATEGORIES.forEach((category) => {
             stats[category] = {
                 countOfActive: getCountOfCategory(notes, category, Status.ACTIVE),
                 countOfArchived: getCountOfCategory(notes, category, Status.ARCHIVED),
             };
         });
+
         return stats;
     }
 

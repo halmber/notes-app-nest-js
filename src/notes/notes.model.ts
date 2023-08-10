@@ -36,4 +36,11 @@ export class NoteModel extends Model<NoteModel, CreateNoteDto> {
     @Column({ type: DataType.STRING, allowNull: false })
     @ApiProperty({ enum: Status })
     status: Status.ACTIVE | Status.ARCHIVED;
+
+    @Column({
+        type: DataType.DATE,
+        allowNull: false,
+        defaultValue: DataType.NOW,
+    })
+    createdAt: Date;
 }
