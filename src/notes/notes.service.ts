@@ -6,11 +6,23 @@ import { getCountOfCategory } from "src/utils/getCountOfCategory ";
 import { EditNoteDto } from "./dto/edit-note.dto";
 import { getDatesFromContent } from "src/utils/getDatesFromContent";
 import { CreateNoteDto } from "./dto/create-note.dto";
+import { NoteModel } from "./notes.model";
+import { InjectModel } from "@nestjs/sequelize";
 
 @Injectable()
 export class NotesService {
-    getAllNotes(): Note[] {
-        return notes;
+    constructor(@InjectModel(NoteModel) private noteRepository: typeof NoteModel) {
+        this.initializeDatabase();
+    }
+
+    private async initializeDatabase() {
+        if ((await this.noteRepository.count()) === 0) {
+            await this.noteRepository.bulkCreate(notes);
+        }
+    }
+
+    async getAllNotes(): Promise<NoteModel[]> {
+        return await this.noteRepository.findAll();
     }
 
     getDataStatistic(): Stats {
@@ -59,18 +71,17 @@ export class NotesService {
         }
     }
 
-    addNote(payload: CreateNoteDto): Note {
+    async addNote(payload: CreateNoteDto): Promise<NoteModel> {
         if (Object.keys(payload).length === 0) {
             throw new HttpException("Empty request body", HttpStatus.BAD_REQUEST);
         }
         const newNote = {
             ...payload,
             id: notes.at(-1).id + 1,
-            created: new Date().getTime(),
             dates: getDatesFromContent(payload.content),
             status: Status.ACTIVE,
         };
-        notes.push(newNote);
-        return newNote;
+        const createdNote = await this.noteRepository.create(newNote);
+        return createdNote;
     }
 }

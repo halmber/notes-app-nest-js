@@ -14,7 +14,7 @@ export class NotesController {
     constructor(private readonly notesService: NotesService) {}
     @ApiResponse({ status: 200, description: "OK", type: [NoteModel] })
     @Get()
-    getAllNotes(): Note[] {
+    getAllNotes(): Promise<NoteModel[]> {
         return this.notesService.getAllNotes();
     }
 
@@ -48,7 +48,7 @@ export class NotesController {
 
     @ApiResponse({ status: 201, description: "Created", type: NoteModel })
     @Post()
-    addNote(@Body() editNoteDto: CreateNoteDto): Note {
+    addNote(@Body() editNoteDto: CreateNoteDto): Promise<NoteModel> {
         return this.notesService.addNote(editNoteDto);
     }
 }
