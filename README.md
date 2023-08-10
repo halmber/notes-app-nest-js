@@ -19,7 +19,7 @@ To set up and run the project locally, follow these steps:
 2. Navigate to the project directory:
 
     ```bash
-    cd notes-app
+    cd notes-app-nest-js
     ```
 
 3. Build and start the Docker containers:
@@ -66,7 +66,7 @@ To develop and extend the application further:
 2. Navigate to the project directory:
 
     ```bash
-    cd notes-app
+    cd notes-app-nest-js
     ```
 
 3. Install dependencies:
