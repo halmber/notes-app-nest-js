@@ -2,37 +2,39 @@
   <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
 </p>
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+# NodeJS Notes Application
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+This NodeJS application provides a RESTful API for managing notes. Users can perform operations like adding, editing, and removing notes, as well as archiving and unarchiving them. The application uses TypeScript, NestJS framework, and Docker for containerization.
 
-## Description
+## Getting Started
 
-### About the task:
+To set up and run the project locally, follow these steps:
 
-1. Task is to create a NodeJS application with TypeScript that will have few REST endpoints.
+1. Clone the repository:
 
-2. Users can add, edit and remove notes, archive and unarchive them.
+    ```bash
+    git clone https://github.com/halmber/notes-app.git
+    ```
 
-3. Store data in memory as a mocked object. Prepopulate it with 7 notes and use it by default as an initial state so that they are returned when you call an endpoint. You can use the same object structure as in the frontend using following columns: [“Name”, “Date”, “Category”, “Content”] and also additional columns if needed.
+2. Navigate to the project directory:
 
-### List of endpoints should look like this:
+    ```bash
+    cd notes-app
+    ```
+
+3. Build and start the Docker containers:
+
+    ```bash
+    docker-compose up
+    ```
+
+    This will start the NodeJS application and PostgreSQL database inside Docker containers.
+
+4. Access the Swagger documentation:
+
+    Open your web browser and navigate to `http://localhost:3000/api/docs` to interact with the API using Swagger.
+
+## List of endpoints should look like this:
 
 | Query type | Endpoint     | Action                                                                                                                      |
 | :--------- | :----------- | :-------------------------------------------------------------------------------------------------------------------------- |
@@ -43,48 +45,73 @@
 | GET        | /notes       | Get all notes.                                                                                                              |
 | GET        | /notes/stats | Get aggregated data statistics. You don’t have to mock this data. You need to calculate it based on notes objects you have. |
 
-## Installation
+## Technology Stack
 
-```bash
-$ npm install
-```
+-   Node.js
+-   TypeScript
+-   NestJS
+-   Docker
+-   PostgreSQL
 
-## Running the app
+## Development
 
-```bash
-# development
-$ npm run start
+To develop and extend the application further:
 
-# watch mode
-$ npm run start:dev
+1. Clone the repository:
 
-# production mode
-$ npm run start:prod
-```
+    ```bash
+    git clone https://github.com/halmber/notes-app.git
+    ```
 
-## Test
+2. Navigate to the project directory:
 
-```bash
-# unit tests
-$ npm run test
+    ```bash
+    cd notes-app
+    ```
 
-# e2e tests
-$ npm run test:e2e
+3. Install dependencies:
 
-# test coverage
-$ npm run test:cov
-```
+    ```bash
+    npm install
+    ```
 
-## Support
+4. Set up your environment variables:
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+    Create a `.env` file in the root directory and configure the following environment variables:
 
-## Stay in touch
+    ```plaintext
+    PORT=3000
+    POSTGRES_HOST=localhost
+    POSTGRES_PORT=5432
+    POSTGRES_USER=your-username
+    POSTGRES_PASSWORD=your-password
+    POSTGRES_DB=notesapp_database
+    ```
 
--   Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
--   Website - [https://nestjs.com](https://nestjs.com/)
--   Twitter - [@nestframework](https://twitter.com/nestframework)
+5. Start the PostgreSQL database:
+
+    Make sure you have PostgreSQL installed and running on your local machine. Create a database named `notesapp_database` (or use a different name and update the `.env` file accordingly).
+
+6. Run the application locally:
+
+    ```bash
+    npm run start:dev
+    ```
+
+7. Access Swagger documentation:
+
+    Open your web browser and navigate to `http://localhost:3000/api/docs` to interact with the API using Swagger.
+
+8. Create your features or improvements.
+
+9. Test your changes and ensure everything works as expected.
+
+10. Once satisfied, you can consider deploying the application using Docker as mentioned in the previous sections.
+
+## Contributing
+
+Contributions are welcome! Feel free to open issues or submit pull requests if you have any suggestions, improvements, or bug fixes.
 
 ## License
 
-Nest is [MIT licensed](LICENSE).
+This project is licensed under the [MIT License](LICENSE).
