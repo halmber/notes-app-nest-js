@@ -36,39 +36,44 @@ export class NotesService {
         return stats;
     }
 
-    getNote(id: number): Note {
-        const note = notes.find((note) => note.id === id);
+    async getNoteById(id: number): Promise<NoteModel> {
+        const note = await this.noteRepository.findByPk(id);
+
         if (!note) {
             throw new NotFoundException(`Note with id ${id} was not found.`);
         }
+
         return note;
     }
 
-    editNote(payload: EditNoteDto, id: number): Note {
-        if (Object.keys(payload).length === 0) {
-            throw new HttpException("No content", HttpStatus.NO_CONTENT);
-        }
+    // editNote(payload: EditNoteDto, id: number): Note {
+    //     if (Object.keys(payload).length === 0) {
+    //         throw new HttpException("No content", HttpStatus.NO_CONTENT);
+    //     }
 
-        const noteIndex = notes.findIndex((note) => note.id === id);
-        if (noteIndex !== -1) {
-            notes[noteIndex] = {
-                ...notes[noteIndex],
-                ...payload,
-                dates: payload.content ? getDatesFromContent(payload.content) : notes[noteIndex].dates,
-            };
-            return notes[noteIndex];
+    //     const noteIndex = notes.findIndex((note) => note.id === id);
+    //     if (noteIndex !== -1) {
+    //         notes[noteIndex] = {
+    //             ...notes[noteIndex],
+    //             ...payload,
+    //             dates: payload.content ? getDatesFromContent(payload.content) : notes[noteIndex].dates,
+    //         };
+    //         return notes[noteIndex];
+    //     } else {
+    //         throw new NotFoundException(`Note with id ${id} was not found.`);
+    //     }
+    // }
+
+    async deleteNoteById(id: number): Promise<NoteModel> {
+        const note = await this.noteRepository.findByPk(id);
+
+        if (note) {
+            await note.destroy();
         } else {
             throw new NotFoundException(`Note with id ${id} was not found.`);
         }
-    }
 
-    deleteNote(id: number): Note {
-        const noteIndex = notes.findIndex((note) => note.id === id);
-        if (noteIndex !== -1) {
-            return notes.splice(noteIndex, 1)[0];
-        } else {
-            throw new NotFoundException(`Note with id ${id} was not found.`);
-        }
+        return note;
     }
 
     async addNote(payload: CreateNoteDto): Promise<NoteModel> {
@@ -77,11 +82,9 @@ export class NotesService {
         }
         const newNote = {
             ...payload,
-            id: notes.at(-1).id + 1,
             dates: getDatesFromContent(payload.content),
             status: Status.ACTIVE,
         };
-        const createdNote = await this.noteRepository.create(newNote);
-        return createdNote;
+        return await this.noteRepository.create(newNote);
     }
 }

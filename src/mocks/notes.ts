@@ -3,7 +3,6 @@ import { Note } from "src/notes/types/types";
 
 export let notes: Note[] = [
     {
-        id: 0,
         name: "Shoping list",
         category: "Task",
         content: "Tomatoes, bread",
@@ -11,7 +10,6 @@ export let notes: Note[] = [
         status: Status.ARCHIVED,
     },
     {
-        id: 1,
         name: "Dentist",
         category: "Idea",
         content:
@@ -20,7 +18,6 @@ export let notes: Note[] = [
         status: Status.ACTIVE,
     },
     {
-        id: 2,
         name: "Gym Workout",
         category: "Random Thought",
         content: "Plan gym workout for tomorrow. Focus on cardio and core exercises.",
@@ -28,7 +25,6 @@ export let notes: Note[] = [
         status: Status.ARCHIVED,
     },
     {
-        id: 3,
         name: "Travel Ideas",
         category: "Idea",
         content: "Research travel destinations for the next vacation. Consider beaches or mountains.",
@@ -36,7 +32,6 @@ export let notes: Note[] = [
         status: Status.ACTIVE,
     },
     {
-        id: 4,
         name: "Language Learning",
         category: "Task",
         content: "Practice vocabulary and grammar in the target language. Watch language learning videos.",
@@ -44,7 +39,6 @@ export let notes: Note[] = [
         status: Status.ACTIVE,
     },
     {
-        id: 5,
         name: "Financial Planning",
         category: "Plan",
         content: "Review monthly expenses and create a budget for the next month by 31.07.23",
@@ -52,7 +46,6 @@ export let notes: Note[] = [
         status: Status.ACTIVE,
     },
     {
-        id: 6,
         name: "Project Ideas",
         category: "Task",
         content: "Brainstorm new project ideas. Consider photography, painting, or writing.",

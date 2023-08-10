@@ -30,20 +30,20 @@ export class NotesController {
 
     @ApiResponse({ status: 200, description: "OK", type: NoteModel })
     @Get(":id")
-    getNote(@Param("id", PositiveIntPipe) id: string): Note {
-        return this.notesService.getNote(Number(id));
+    getNote(@Param("id", PositiveIntPipe) id: string): Promise<NoteModel> {
+        return this.notesService.getNoteById(Number(id));
     }
 
-    @ApiResponse({ status: 200, description: "OK", type: NoteModel })
-    @Patch(":id")
-    editNote(@Body() editNoteDto: EditNoteDto, @Param("id", PositiveIntPipe) id: string): Note {
-        return this.notesService.editNote(editNoteDto, Number(id));
-    }
+    // @ApiResponse({ status: 200, description: "OK", type: NoteModel })
+    // @Patch(":id")
+    // editNote(@Body() editNoteDto: EditNoteDto, @Param("id", PositiveIntPipe) id: string): Note {
+    //     return this.notesService.editNote(editNoteDto, Number(id));
+    // }
 
     @ApiResponse({ status: 200, description: "OK", type: NoteModel })
     @Delete(":id")
-    deleteNote(@Param("id", PositiveIntPipe) id: string): Note {
-        return this.notesService.deleteNote(Number(id));
+    deleteNote(@Param("id", PositiveIntPipe) id: string): Promise<NoteModel> {
+        return this.notesService.deleteNoteById(Number(id));
     }
 
     @ApiResponse({ status: 201, description: "Created", type: NoteModel })

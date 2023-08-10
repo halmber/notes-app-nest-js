@@ -3,7 +3,6 @@ import { Status } from "../constants/constants";
 export type CategoryType = "Idea" | "Task" | "Plan" | "Random Thought";
 
 export interface Note {
-    id: number;
     name: string;
     category: CategoryType;
     content: string;
